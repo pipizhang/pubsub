@@ -13,3 +13,6 @@ test: ## Run go test
 lint: ## Run Lint check
 	@(scripts/lint)
 
+.PHONY:build
+build: ## Build Application
+	@exec go build -tags netgo -o pubsub main.go
