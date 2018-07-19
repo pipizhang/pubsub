@@ -1,0 +1,30 @@
+# Develop configuration
+
+[app]
+name = "pubsub"
+mode = "dev"
+
+[server]
+graceful = true
+address  = ":8090"
+off_timeout = 10
+
+[log]
+level = "debug"
+file = "log/app.log"
+
+[ipwhitelist]
+enable = false
+list = ["127.0.0.1", "172.17.0.0/24"]
+
+[emitter]
+address = "tcp://127.0.0.1:8080"
+secret_key = "bEFrLSv-FIDoPW3AD8MXBvCW8TGe8Txx"
+
+[[channels]]
+prefix = "site/"
+key = "9l2lzAAjoX4DpcKjClzGepR4yVGuIYzC"
+
+[[channels]]
+prefix = "user/"
+key = "1PcCuMbtKPZCmT36C_IFB4SRITvb-vii"
