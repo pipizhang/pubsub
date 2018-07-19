@@ -8,10 +8,11 @@ import (
 )
 
 var (
+	// AppLog is a globle instance of logrus.Logger
 	AppLog *logrus.Logger
 )
 
-// InitLog use for initial log module
+// InitLog for initial log module
 func InitLog() error {
 
 	var err error
@@ -44,7 +45,7 @@ func SetLogOut(log *logrus.Logger, outString string) error {
 	case "stderr":
 		log.Out = os.Stderr
 	default:
-		f, err := os.OpenFile(outString, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
+		f, err := os.OpenFile(outString, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
 		if err != nil {
 			return err

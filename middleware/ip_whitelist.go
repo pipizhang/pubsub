@@ -24,20 +24,24 @@ type (
 )
 
 var (
+	// DefaultIPWhitelistConfig is default configuration
 	DefaultIPWhitelistConfig = IPWhitelistConfig{
 		Enable: true,
 	}
+	// GIPFilter is a global gIPFilter instance
 	GIPFilter = &gIPFilter{
 		IsInitialized: false,
 	}
 )
 
+// IPWhitelist receives ip list and returns echo.MiddlewareFunc
 func IPWhitelist(ipList []string) echo.MiddlewareFunc {
 	c := DefaultIPWhitelistConfig
 	c.List = ipList
 	return IPWhitelistWithConfig(c)
 }
 
+// IPWhitelistWithConfig receives config instance and returns echo.MiddleFunc
 func IPWhitelistWithConfig(config IPWhitelistConfig) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) (err error) {

@@ -19,6 +19,7 @@ type (
 )
 
 var (
+	// BrokerController instance
 	BrokerController = &brokerController{}
 )
 

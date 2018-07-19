@@ -13,6 +13,7 @@ import (
 	"github.com/pipizhang/pubsub/pkg"
 )
 
+// Start Server
 func Start(confFile string, ipDBFile string) {
 
 	pkg.InitConf(confFile)

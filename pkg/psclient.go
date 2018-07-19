@@ -7,14 +7,17 @@ import (
 )
 
 type (
+	// PSClient is a wrapper of Emitter client
 	PSClient struct {
 		Client emitter.Emitter
 	}
 )
 
 var (
+	// ErrPSConnection is a connection error
 	ErrPSConnection = errors.New("Failed to connect Pub/Sub service")
-	ErrPSPublish    = errors.New("Failed to publish message")
+	// ErrPSPublish is a publish error
+	ErrPSPublish = errors.New("Failed to publish message")
 )
 
 // NewPSClient returns an instance of PSClient
@@ -26,7 +29,7 @@ func NewPSClient() *PSClient {
 	return &PSClient{Client: c}
 }
 
-// Sync Connect
+// Connect offers sync function
 func (p *PSClient) Connect() error {
 	sToken := p.Client.Connect()
 	if sToken.Wait() && sToken.Error() != nil {
@@ -36,14 +39,14 @@ func (p *PSClient) Connect() error {
 	return nil
 }
 
-// Disconnect
+// Disconnect offers sync function
 func (p *PSClient) Disconnect(waitTime uint) {
 	if p.Client.IsConnected() {
 		p.Client.Disconnect(waitTime)
 	}
 }
 
-// Sync Publish function
+// Publish offers sync function
 func (p *PSClient) Publish(key string, channel string, payload interface{}) error {
 	sToken := p.Client.Publish(key, channel, payload)
 	if sToken.Wait() && sToken.Error() != nil {
@@ -53,7 +56,7 @@ func (p *PSClient) Publish(key string, channel string, payload interface{}) erro
 	return nil
 }
 
-// Sync PublishWithTTL function
+// PublishWithTTL offers sync function
 func (p *PSClient) PublishWithTTL(key string, channel string, payload interface{}, ttl int) error {
 	sToken := p.Client.PublishWithTTL(key, channel, payload, ttl)
 	if sToken.Wait() && sToken.Error() != nil {

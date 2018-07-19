@@ -59,7 +59,7 @@ func (c config) ServerOffTimeout() time.Duration {
 	return time.Duration(c.Server.OffTimeout) * time.Second
 }
 
-// Search and return matched channel
+// GetChannel search and return matched channel
 func (c config) GetChannel(path string) (channel, bool) {
 	var ch channel
 	for _, _ch := range Conf.Channels {
@@ -70,7 +70,7 @@ func (c config) GetChannel(path string) (channel, bool) {
 	return ch, false
 }
 
-// Initialize Conf
+// InitConf initializes Conf
 func InitConf(file string) {
 	if _, err := toml.DecodeFile(file, &Conf); err != nil {
 		panic("loading config file error")
