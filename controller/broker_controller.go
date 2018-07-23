@@ -16,6 +16,10 @@ type (
 		Channel string `json:"channel" form:"channel"`
 		Message string `json:"message" form:"message"`
 	}
+
+	pubResponse struct {
+		Message string `json:"message"`
+	}
 )
 
 var (
@@ -46,6 +50,10 @@ func (b brokerController) Publish(c echo.Context) (err error) {
 	}
 
 	err = client.Publish(ch.Key, req.Channel, req.Message)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, pubResponse{Message: err.Error()})
+	}
 
-	return c.JSON(http.StatusOK, "success")
+	return c.JSON(http.StatusOK, pubResponse{Message: "success"})
+
 }
