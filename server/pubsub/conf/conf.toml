@@ -1,0 +1,30 @@
+# Production configuration
+
+[app]
+name = "pubsub"
+mode = "prod"
+
+[server]
+graceful = true
+address  = ":8090"
+off_timeout = 10
+
+[log]
+level = "info"
+file = "log/app.log"
+
+[ipwhitelist]
+enable = false
+list = ["127.0.0.1", "172.17.0.0/24"]
+
+[emitter]
+address = "tcp://emitter:8080"
+secret_key = ""
+
+[[channels]]
+prefix = "site/"
+key = ""
+
+[[channels]]
+prefix = "user/"
+key = ""

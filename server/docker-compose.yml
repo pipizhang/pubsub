@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    image: peterzhang/pubsub:latest
+    restart: always
+    volumes:
+      - ./pubsub/conf/conf.toml:/app/conf/conf.toml
+      - ./pubsub/log:/app/log
+    ports:
+      - "127.0.0.1:8090:8090"
+    depends_on:
+      - emitter
+  emitter:
+    image: peterzhang/emitter:latest
+    restart: always
+    environment:
+      - EMITTER_LICENSE=you_license
+    ports:
+      - "127.0.0.1:8080:8080"
+
